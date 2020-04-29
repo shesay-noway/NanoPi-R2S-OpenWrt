@@ -1,5 +1,5 @@
 # NanoPi-R2S-OpenWrt
- 使用 Github Actions 在线编译 NanoPi-R2s 固件
+ 使用 Github Actions 在线编译 NanoPi-R2S 固件
 
 ## 发布地址
 [点我下载](https://github.com/msylgj/NanoPi-R2S-OpenWrt/releases)
