@@ -155,6 +155,7 @@ jobs:
           make savedefconfig
           cp .config ../../artifact/kconfig-full
           cp defconfig ../../artifact/kconfig-lite
+          cd ../../
           zip -r artifact.zip ./artifact/
           release_tag="R2S-OPoA-Chuck-$(date +%Y-%m-%d)"
           echo "##[set-output name=release_tag;]$release_tag"
