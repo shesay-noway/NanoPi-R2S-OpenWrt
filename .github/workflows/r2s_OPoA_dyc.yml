@@ -17,7 +17,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    if: github.repository == 'msylgj/nanopi-openwrt'
+    if: github.repository == 'msylgj/NanoPi-R2S-OpenWrt'
 
     steps:
 
