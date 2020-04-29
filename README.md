@@ -5,7 +5,7 @@
 [点我下载](https://github.com/msylgj/NanoPi-R2S-OpenWrt/releases)
 
 ## 更新说明
-[经常会忘记写的更新说明](https://github.com/msylgj/NanoPi-R2S-OpenWrt/CHANGELOG.md)
+[经常会忘记写的更新说明](https://github.com/msylgj/NanoPi-R2S-OpenWrt/blob/master/CHANGELOG.md)
 
 ## 说明
 * 双版本,Fork自以下两位大神,个人根据**完全私人**口味进行了一定修改
