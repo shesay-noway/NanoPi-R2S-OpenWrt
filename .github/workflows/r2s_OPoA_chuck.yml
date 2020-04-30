@@ -174,7 +174,7 @@ jobs:
           tag_name: ${{ steps.save_config.outputs.release_tag }}
           release_name: 自动发布 ${{ steps.save_config.outputs.release_tag }}
           draft: false
-          prerelease: false
+          prerelease: true
 
       - name: Upload Release Asset
         id: upload-release-asset
