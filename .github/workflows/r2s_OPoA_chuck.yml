@@ -98,7 +98,7 @@ jobs:
           cat config_rk3328_chuck.seed > rk3328/configs/config_rk3328
           cd rk3328/friendlywrt
           sed -i "s/OpenWrt/Built by OPoA($(date +%Y-%m-%d)) @ OpenWrt/g" package/lean/default-settings/files/zzz-default-settings
-          sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner
+          sed -i "/FriendlyWRT/a\  OPoA Build" package/base-files/files/etc/banner
           mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
 
