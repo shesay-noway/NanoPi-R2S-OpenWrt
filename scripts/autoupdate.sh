@@ -29,7 +29,7 @@ else
 	echo -e '\e[92m请选择版本分支\e[0m'
 	echo -e '\e[92m  1.DYC版(默认)\e[0m'
 	echo -e '\e[92m  2.Chuck版\e[0m'
-	read -p '请选择(1/2)):' rom
+	read -p '请选择(1/2):' rom
 	if [ $rom -eq 2 ]; then
 		romtype='Chuck'
 	else

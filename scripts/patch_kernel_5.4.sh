@@ -1,6 +1,7 @@
 cd friendlywrt-rk3328
 cd kernel/
-git apply ../../patches/001-dyc-add_fullconenat.patch
+wget -O net/netfilter/xt_FULLCONENAT.c https://raw.githubusercontent.com/Chion82/netfilter-full-cone-nat/master/xt_FULLCONENAT.c
+git apply ../../patches/001-kernel-add-full_cone_nat.patch
 wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
 git apply RK3328-enable-1512mhz-opp.patch
 cd ../
@@ -17,3 +18,4 @@ wget https://github.com/torvalds/linux/raw/master/scripts/kconfig/merge_config.s
 grep -i '_NETFILTER_\|FLOW' ../config/.config.override > .config.override
 ./merge_config.sh -m .config.override kernel/arch/arm64/configs/nanopi-r2_linux_defconfig && mv .config kernel/arch/arm64/configs/nanopi-r2_linux_defconfig
 sed -i -r 's/# (CONFIG_.*_ERRATUM_.*?) is.*/\1=y/g' kernel/arch/arm64/configs/nanopi-r2_linux_defconfig
+sed -i '/CONFIG_BLK_DEV_IO_TRACE/a\CONFIG_IP_NF_TARGET_FULLCONENAT=y' kernel/arch/arm64/configs/nanopi-r2_linux_defconfig
