@@ -1,6 +1,9 @@
 # NanoPi-R2S-OpenWrt
  使用 Github Actions 在线编译 NanoPi-R2S 固件
 
+ ![lean's openwrt from dyc](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/lean's%20openwrt%20from%20dyc/badge.svg)
+ ![lean's openwrt from chuck](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/lean's%20openwrt%20from%20chuck/badge.svg)
+
 ## 发布地址
 [点我下载](https://github.com/msylgj/NanoPi-R2S-OpenWrt/releases)
 
