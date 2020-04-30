@@ -43,8 +43,6 @@ jobs:
           sudo apt-get update
           sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf
           wget -O - https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh | bash
-          git config --global user.name "msylgj"
-          git config --global user.email "msylgj@vip.qq.com"
 
       - name: Install Repo
         run: |
@@ -91,11 +89,16 @@ jobs:
           cd rk3328/kernel/
           wget -O net/netfilter/xt_FULLCONENAT.c https://raw.githubusercontent.com/Chion82/netfilter-full-cone-nat/master/xt_FULLCONENAT.c
           git apply ../../patches/001-kernel-add-full_cone_nat.patch
+        # 需要开启超频的话删除下面两行前面#号即可
+          #wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
+          #git apply RK3328-enable-1512mhz-opp.patch
           cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
 
       - name: Customize Configuration
         run: |
           cat config_rk3328_chuck.seed > rk3328/configs/config_rk3328
+        # 无线wifi支持,需要的话删除下面一行前面#号即可
+          #cat config_usb-net_chuck.seed > rk3328/configs/config_rk3328
           cd rk3328/friendlywrt
           sed -i "s/OpenWrt/Built by OPoA($(date +%Y-%m-%d)) @ OpenWrt/g" package/lean/default-settings/files/zzz-default-settings
           sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner

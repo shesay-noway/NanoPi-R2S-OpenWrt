@@ -17,6 +17,7 @@
 * 添加Flow Offload和Full Cone Nat
 * 内置aria2自动更新bt-tracker脚本
 * wan口和lan口互换(*chuck*)
+* 1.5Ghz超频, 跑分专用(*dyc*)
 
 ## 插件清单
 - aria2
@@ -30,9 +31,17 @@
 - 默认移除: netdata upnp uhttpd vftpd frpc
 
 ## 版本区别
-1. DYC(klever1988)版本修改时保留了对usb-wifi的支持,未互换wan lan
-2. Chuck(fanck0605)版本修改时未同步添加usb-wifi支持,**可能**无法正常使用,开启wan lan互换, 较为精简
-3. 其它未感受到明显差异, 两个版本都十分优秀, 请不要做任何比较, 选择合适的就好
+* DYC(klever1988)版本
+    - 保留了对usb-wifi的支持
+    - 未互换wan lan
+    - 开启1.5G超频
+* Chuck(fanck0605)版本
+    - 未同步添加usb-wifi支持
+    - 开启wan lan互换
+    - 未超频
+    - 较为精简
+* 以上区别都增加到了yml中注释掉了,有需要可以在yml中删除注释后自行编译
+* 其它未感受到明显差异, 两位大佬的版本都十分优秀, 请不要做任何比较, 选择合适的就好
 
 ## 升级方法
 * ssh登录到路由器,直接执行./au.sh

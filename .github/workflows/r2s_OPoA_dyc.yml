@@ -91,6 +91,12 @@ jobs:
           mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
 
+      # 互换wan&lan口,需要的话删除下面四行前面#号即可
+      #- name: Swap wan and lan
+      #  run: |
+      #    cd friendlywrt-rk3328/friendlywrt
+      #    git apply ../../patches/003-openwrt-swap-wan-and-lan.patch
+
       - name: Add OPKG Feeds
         run: |
           cd friendlywrt-rk3328
