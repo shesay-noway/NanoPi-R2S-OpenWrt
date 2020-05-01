@@ -104,7 +104,7 @@ jobs:
           cat config_rk3328_chuck.seed > rk3328/configs/config_rk3328
           #cat config_usb-net_chuck.seed > rk3328/configs/config_rk3328
           cd rk3328/friendlywrt
-          sed -i "s/OpenWrt/Built by OPoA($(date +%Y-%m-%d)) @ OpenWrt/g" package/lean/default-settings/files/zzz-default-settings
+          sed -i "s/OpenWrt/Built by OPoA($(date +%Y.%m.%d)) @ OpenWrt/g" package/lean/default-settings/files/zzz-default-settings
           sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner
           sed -i '/uci commit luci/a\uci commit firewall' package/lean/default-settings/files/zzz-default-settings
           sed -i '/uci commit luci/a\uci set firewall.@zone[1].forward=REJECT' package/lean/default-settings/files/zzz-default-settings
