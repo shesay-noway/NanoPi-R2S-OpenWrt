@@ -57,9 +57,9 @@ jobs:
         run: |
           cd friendlywrt-rk3328
           . ../scripts/remove_unused_config.sh
-          cat configs/config_rk3328 | grep "TARGET" >> ../base_rk3328_dyc.seed
-          cat ../app_config_dyc.seed >> ../base_rk3328_dyc.seed
-          cat ../base_rk3328_dyc.seed > configs/config_rk3328
+          cat configs/config_rk3328 | grep "TARGET" >> ../config/base_rk3328_dyc.seed
+          cat ../config/app_config_dyc.seed >> ../config/base_rk3328_dyc.seed
+          cat ../config/base_rk3328_dyc.seed > configs/config_rk3328
 
       - name: Merge
         run: |
