@@ -10,12 +10,12 @@ echo -e '\e[92m  2.在线下载更新且跳过备份\e[0m'
 echo -e '\e[92m  3.本地更新(固件上传至/tmp/upload目录)\e[0m'
 echo -e '\e[92m  4.本地更新且跳过备份(固件上传至/tmp/upload目录)\e[0m'
 read -p '请选择(1/2/3/4):' input
-if [ $input -eq 3 ] || [ $input -eq 4 ]; then
+if [ "$input" -eq 3 ] || [ "$input" -eq 4 ]; then
 	if [ -f /tmp/upload/R2S*.zip ]; then
 		echo -e '\e[92m已找到固件文件，准备解压\e[0m'
 		mv /tmp/upload/R2S*.zip /overlay
 		cd /overlay
-		if [ $input -eq 4 ]; then
+		if [ "$input" -eq 4 ]; then
 			backup=0
 		fi
 	else
@@ -23,14 +23,14 @@ if [ $input -eq 3 ] || [ $input -eq 4 ]; then
 		exit 1
 	fi
 else
-	if [ $input -eq 2 ]; then
+	if [ "$input" -eq 2 ]; then
 		backup=0
 	fi
 	echo -e '\e[92m请选择版本分支\e[0m'
 	echo -e '\e[92m  1.DYC版(默认)\e[0m'
 	echo -e '\e[92m  2.Chuck版\e[0m'
 	read -p '请选择(1/2):' rom
-	if [ $rom -eq 2 ]; then
+	if [ "$rom" -eq 2 ]; then
 		romtype='Chuck'
 	else
 		romtype='DYC'
