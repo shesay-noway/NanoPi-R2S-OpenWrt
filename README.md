@@ -31,7 +31,7 @@
 - frps(注意是服务端)
 - kms
 - **r-Plus
-- 默认移除: netdata upnp uhttpd vftpd frpc
+- 默认移除: netdata uhttpd vftpd frpc
 
 ## 版本区别
 * DYC(klever1988)版本
