@@ -11,6 +11,7 @@
 [经常会忘记写的更新说明](https://github.com/msylgj/NanoPi-R2S-OpenWrt/blob/master/CHANGELOG.md)
 
 ## 说明
+* chuck版使用了5.2.36最新内核,目前看该版本内核有一些问题,暂时不建议使用在主力机器上
 * 双版本,Fork自以下两位大神,个人根据**完全私人**口味进行了一定修改
     - [klever1988/nanopi-openwrt](https://github.com/klever1988/nanopi-openwrt)
     - [fanck0605/nanopi-r2s](https://github.com/fanck0605/nanopi-r2s)
@@ -19,6 +20,10 @@
 * password: password
 * 添加Flow Offload和Full Cone Nat
 * 内置aria2自动更新bt-tracker脚本
+    - 需要使用的话在计划任务处增加一行(时间格式:分 时 日 月 星期几 *代表任意)
+    ```bash
+    0 1 * * * /usr/bin/autoupdate_tracker.sh 1>/dev/null 2>&1 &
+    ```
 * wan口和lan口互换(*chuck*)
 * 1.5Ghz超频, 跑分专用(*dyc*)
 
