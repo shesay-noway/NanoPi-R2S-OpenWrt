@@ -1,6 +1,6 @@
 ## 20200501
 * chuck版改用大佬提供的cpu温度显示,移除autocore
-* chuck版升级至5.2.36内核,新内核版本暂时标记为pre
+* chuck版升级至5.4.36内核,新内核版本暂时标记为pre
 * chuck版增加ramfree
 * 恢复upnp
 * 默认关闭wan口防火墙入站和转发

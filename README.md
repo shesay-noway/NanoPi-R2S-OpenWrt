@@ -11,7 +11,7 @@
 [经常会忘记写的更新说明](https://github.com/msylgj/NanoPi-R2S-OpenWrt/blob/master/CHANGELOG.md)
 
 ## 说明
-* chuck版使用了5.2.36最新内核,目前看该版本内核有一些问题,暂时不建议使用在主力机器上
+* chuck版使用了5.4.36最新内核,目前看该版本内核有一些问题,暂时不建议使用在主力机器上
 * 双版本,Fork自以下两位大神,个人根据**完全私人**口味进行了一定修改
     - [klever1988/nanopi-openwrt](https://github.com/klever1988/nanopi-openwrt)
     - [fanck0605/nanopi-r2s](https://github.com/fanck0605/nanopi-r2s)
