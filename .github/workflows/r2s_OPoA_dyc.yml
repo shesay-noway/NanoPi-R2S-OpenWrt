@@ -85,7 +85,6 @@ jobs:
           sed -i "s/OpenWrt/Built by OPoA($(date +%Y-%m-%d)) @ OpenWrt/g" package/lean/default-settings/files/zzz-default-settings
           sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner
           sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon"' package/lean/default-settings/files/zzz-default-settings
-          sed -i '/exit/i\chown -R root:root /usr/share/netdata/web' package/lean/default-settings/files/zzz-default-settings
           sed -i '/exit/i\find /etc/rc.d/ -name *docker* -delete' package/lean/default-settings/files/zzz-default-settings
           sed -i '/uci commit luci/a\uci commit firewall' package/lean/default-settings/files/zzz-default-settings
           sed -i '/uci commit luci/a\uci set firewall.@zone[1].forward=REJECT' package/lean/default-settings/files/zzz-default-settings
