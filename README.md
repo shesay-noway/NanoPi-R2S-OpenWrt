@@ -27,6 +27,13 @@
     ```
 * wan口和lan口互换(*chuck*)
 
+## 已知问题
+### chuck版
+1. **r-Plus添加服务器时导入按钮报错无法使用
+
+### dyc版
+1. 暂无
+
 ## 插件清单
 - aria2
 - ddns with aliyun&dnspod
