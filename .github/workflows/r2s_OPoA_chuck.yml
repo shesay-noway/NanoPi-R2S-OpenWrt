@@ -92,11 +92,7 @@ jobs:
           git apply ../../patches/001-kernel-add-full_cone_nat.patch
           #wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
           #git apply RK3328-enable-1512mhz-opp.patch
-          wget https://github.com/torvalds/linux/raw/master/scripts/kconfig/merge_config.sh && chmod +x merge_config.sh
-          grep -i '_NETFILTER_\|FLOW' ../../config/.config.override > .config.override
-          ./merge_config.sh -m .config.override arch/arm64/configs/nanopi-r2_linux_defconfig && mv .config arch/arm64/configs/nanopi-r2_linux_defconfig
-          sed -i -r 's/# (CONFIG_.*_ERRATUM_.*?) is.*/\1=y/g' arch/arm64/configs/nanopi-r2_linux_defconfig
-          #cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
+          cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
 
       # 无线wifi支持,需要的话删除下面一行前面#号即可
       - name: Customize Configuration
