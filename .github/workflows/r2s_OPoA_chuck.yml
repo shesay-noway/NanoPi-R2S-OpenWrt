@@ -84,14 +84,13 @@ jobs:
           cd ../ && rm -rf openwrt
 
       # refer to klever1988/nanopi-openwrt, modified by Chuck <fanck0605@qq.com>
-      # 需要开启超频的话删除下面两行前面#号即可
       - name: Enable Kernel futures
         run: |
           cd rk3328/kernel/
           wget -O net/netfilter/xt_FULLCONENAT.c https://raw.githubusercontent.com/Chion82/netfilter-full-cone-nat/master/xt_FULLCONENAT.c
           git apply ../../patches/001-kernel-add-full_cone_nat.patch
-          #wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
-          #git apply RK3328-enable-1512mhz-opp.patch
+          wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
+          git apply RK3328-enable-1512mhz-opp.patch
           cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
 
       # 无线wifi支持,需要的话删除下面一行前面#号即可

@@ -19,13 +19,13 @@
 * username: root
 * password: password
 * 添加Flow Offload和Full Cone Nat
+* 1.5Ghz超频, 跑分专用
 * 内置aria2自动更新bt-tracker脚本
     - 需要使用的话在计划任务处增加一行(时间格式:分 时 日 月 星期几 *代表任意)
     ```bash
     0 1 * * * /usr/bin/autoupdate_tracker.sh 1>/dev/null 2>&1 &
     ```
 * wan口和lan口互换(*chuck*)
-* 1.5Ghz超频, 跑分专用(*dyc*)
 
 ## 插件清单
 - aria2
@@ -42,11 +42,9 @@
 * DYC(klever1988)版本
     - 保留了对usb-wifi的支持
     - 未互换wan lan
-    - 开启1.5G超频
 * Chuck(fanck0605)版本
     - 未同步添加usb-wifi支持
     - 开启wan lan互换
-    - 未超频
     - 较为精简
 * 以上区别都增加到了yml中注释掉了,有需要可以在yml中删除注释后自行编译
 * 其它未感受到明显差异, 两位大佬的版本都十分优秀, 请不要做任何比较, 选择合适的就好
