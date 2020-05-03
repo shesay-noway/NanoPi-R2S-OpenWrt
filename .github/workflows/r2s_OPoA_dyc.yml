@@ -67,9 +67,6 @@ jobs:
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git remote add upstream https://github.com/coolsnowwolf/lede && git fetch upstream
           git rebase adc1a9a3676b8d7be1b48b5aed185a94d8e42728^ --onto upstream/master -X theirs
-          git revert --no-edit 4787dbaf3cad44b374b660cc0fef9386963e6795
-          git revert --no-edit 463b6ac0508de4788a6e41335471ced0a255e1cd
-          git revert --no-edit 8faac30089ce616940b3e96c4f4d900aeb6b9fcb
           git revert --no-edit db6a03f2565b162ca63a4cb8af9d90bad5406f29
           git checkout upstream/master -- feeds.conf.default
           sed -i '5s/#src-git/src-git/g' feeds.conf.default
