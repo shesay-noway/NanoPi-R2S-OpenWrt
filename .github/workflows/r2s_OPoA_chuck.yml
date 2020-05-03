@@ -74,7 +74,7 @@ jobs:
       - name: Install Openwrt patches
         run: |
           rm -rf openwrt
-          git clone --single-branch https://github.com/openwrt/openwrt.git --depth=1
+          git clone --depth=1 -b 18.06-kernel5.4 https://github.com/project-openwrt/openwrt.git
           cd openwrt
           ./scripts/patch-kernel.sh ../rk3328/kernel ./target/linux/generic/backport-5.4
           ./scripts/patch-kernel.sh ../rk3328/kernel ./target/linux/generic/pending-5.4
@@ -88,8 +88,8 @@ jobs:
           cd rk3328/kernel/
           wget -O net/netfilter/xt_FULLCONENAT.c https://raw.githubusercontent.com/Chion82/netfilter-full-cone-nat/master/xt_FULLCONENAT.c
           git apply ../../patches/001-kernel-add-full_cone_nat.patch
-          wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
-          git apply RK3328-enable-1512mhz-opp.patch
+          #wget https://github.com/armbian/build/raw/master/patch/kernel/rockchip64-dev/RK3328-enable-1512mhz-opp.patch
+          #git apply RK3328-enable-1512mhz-opp.patch
           cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
 
       # 无线wifi支持,需要的话删除下面一行前面#号即可
@@ -142,20 +142,20 @@ jobs:
           sudo df -lh
           lodev=$(sudo losetup -f)
           echo "found unused loop dev $lodev"
-          sudo losetup -o 100663296 $lodev rk3328/out/*.img
+          sudo losetup -P ${lodev} rk3328/out/FriendlyWrt*.img
           sudo rm -rf /mnt/friendlywrt-tmp
           sudo mkdir -p /mnt/friendlywrt-tmp
-          sudo mount $lodev /mnt/friendlywrt-tmp
+          sudo mount ${lodev}p1 /mnt/friendlywrt-tmp
           sudo chown -R root:root /mnt/friendlywrt-tmp
           sudo umount /mnt/friendlywrt-tmp
-          sudo losetup -d $lodev
+          sudo losetup -d ${lodev}
 
       - name: Assemble Artifact
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          gzip rk3328/out/*.img
-          cp rk3328/out/*.img* ./artifact/
+          gzip rk3328/out/FriendlyWrt*.img
+          cp rk3328/out/FriendlyWrt*.img.gz ./artifact/
 
       - name: Save Configurations
         id: save_config
