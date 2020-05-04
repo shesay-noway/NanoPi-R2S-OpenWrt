@@ -11,7 +11,6 @@
 [经常会忘记写的更新说明](https://github.com/msylgj/NanoPi-R2S-OpenWrt/blob/master/CHANGELOG.md)
 
 ## 说明
-* chuck版使用了5.4.37最新内核,目前正在调整,暂时不建议使用在主力机器上
 * 双版本,Fork自以下两位大神,个人根据**完全私人**口味进行了一定修改
     - [klever1988/nanopi-openwrt](https://github.com/klever1988/nanopi-openwrt)
     - [fanck0605/nanopi-r2s](https://github.com/fanck0605/nanopi-r2s)
@@ -26,10 +25,12 @@
     0 1 * * * /usr/bin/autoupdate_tracker.sh 1>/dev/null 2>&1 &
     ```
 * wan口和lan口互换(*chuck*)
+* chuck版确认使用5.4.36内核,目前测试已基本稳定,有问题可以反馈
+* 建议刷机完成之后先手动重启一次
 
 ## 已知问题
 ### chuck版
-1. **r-Plus添加服务器时导入按钮报错无法使用,查了下应该是由于该app的最新提交导致的
+1. 历史问题已修复,暂无
 
 ### dyc版
 1. 暂无
