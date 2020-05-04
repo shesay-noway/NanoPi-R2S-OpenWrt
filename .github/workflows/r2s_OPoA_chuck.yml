@@ -68,13 +68,13 @@ jobs:
         run: |
           cd rk3328/friendlywrt/package/lean
           rm -rf luci-theme-argon
-          git clone --single-branch -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
+          git clone --depth 1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
 
       # refer to klever1988/nanopi-openwrt, modified by Chuck <fanck0605@qq.com>
       - name: Install Openwrt patches
         run: |
           rm -rf openwrt
-          git clone --depth=1 -b 18.06-kernel5.4 https://github.com/project-openwrt/openwrt.git
+          git clone --depth 1 -b master https://github.com/openwrt/openwrt.git
           cd openwrt
           ./scripts/patch-kernel.sh ../rk3328/kernel ./target/linux/generic/backport-5.4
           ./scripts/patch-kernel.sh ../rk3328/kernel ./target/linux/generic/pending-5.4
