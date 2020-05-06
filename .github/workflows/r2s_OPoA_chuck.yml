@@ -54,7 +54,7 @@ jobs:
       - name: Initialization Source
         run: |
           rm -rf rk3328 && mkdir rk3328 && cd rk3328
-          repo init -u https://github.com/fanck0605/friendlywrt_mainfests -b master-lean -m rk3328.xml --repo-url=https://github.com/friendlyarm/repo --no-clone-bundle
+          repo init -u https://github.com/fanck0605/friendlywrt_mainfests -b openwrt-lean -m rk3328.xml --repo-url=https://github.com/friendlyarm/repo --no-clone-bundle
           repo sync -c --no-clone-bundle -j8
 
       # refer to coolsnowwolf/lede
@@ -111,6 +111,7 @@ jobs:
           sed -i '/distfeeds/i\sed -i '/target/d' /etc/opkg/distfeeds.conf' package/lean/default-settings/files/zzz-default-settings
           sed -i '/distfeeds/i\sed -i '/helloworld/d' /etc/opkg/distfeeds.conf' package/lean/default-settings/files/zzz-default-settings
           sed -i 's/mirrors.tuna.tsinghua.edu.cn/mirrors.cloud.tencent.com/g' package/lean/default-settings/files/zzz-default-settings
+          mv ../../scripts/checkwan.sh package/base-files/files/bin && sed -i '/exit/i\/bin/sh /bin/checkwan.sh 1>/dev/null 2>&1 &' package/base-files/files/etc/rc.local
           mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
 
