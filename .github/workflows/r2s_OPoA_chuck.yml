@@ -1,4 +1,4 @@
-name: lean's openwrt from chuck
+name: Lean's Openwrt From Chuck
 
 # Copyright (c) 2020, Chuck <fanck0605@qq.com>
 #
@@ -12,7 +12,7 @@ on:
     branches:
       - master
     paths:
-      - 'actionStart_chuck'
+      - 'actionStart_Chuck'
   schedule:
     - cron: '00 08 * * 5'
 
@@ -111,14 +111,14 @@ jobs:
           sed -i '/distfeeds/i\sed -i '/target/d' /etc/opkg/distfeeds.conf' package/lean/default-settings/files/zzz-default-settings
           sed -i '/distfeeds/i\sed -i '/helloworld/d' /etc/opkg/distfeeds.conf' package/lean/default-settings/files/zzz-default-settings
           sed -i 's/mirrors.tuna.tsinghua.edu.cn/mirrors.cloud.tencent.com/g' package/lean/default-settings/files/zzz-default-settings
-          mv ../../scripts/checkwan.sh package/base-files/files/bin && sed -i '/exit/i\/bin/sh /bin/checkwan.sh 1>/dev/null 2>&1 &' package/base-files/files/etc/rc.local
+          mv ../../scripts/checkwan.sh package/base-files/files/usr/bin && sed -i '/exit/i\/bin/sh /usr/bin/checkwan.sh 1>/dev/null 2>&1 &' package/base-files/files/etc/rc.local
           mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
 
-      - name: Swap wan and lan
-        run: |
-          cd rk3328/friendlywrt
-          git apply ../../patches/003-openwrt-swap-wan-and-lan.patch
+      # - name: Swap wan and lan
+      #   run: |
+      #     cd rk3328/friendlywrt
+      #     git apply ../../patches/002-openwrt-swap-wan-and-lan.patch
 
       - name: Add OPKG Feeds
         run: |
@@ -185,9 +185,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.workflow_token }}
         with:
           tag_name: ${{ steps.save_config.outputs.release_tag }}
-          release_name: 测试发布版本 ${{ steps.save_config.outputs.release_tag }}
+          release_name: 自动发布 ${{ steps.save_config.outputs.release_tag }}
           draft: false
-          prerelease: true
+          prerelease: false
 
       - name: Upload Release Asset
         id: upload-release-asset

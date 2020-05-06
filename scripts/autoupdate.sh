@@ -33,7 +33,7 @@ else
 	if [ "$rom" -eq 2 ]; then
 		romtype='Chuck'
 	else
-		romtype='DYC'
+		romtype='QiuSimons'
 	fi
 	# 切换下载站点
 	read -p '是否从镜像站点下载?(解决无科学上网情况下下载慢的问题, y or n):' mirror

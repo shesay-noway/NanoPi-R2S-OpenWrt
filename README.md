@@ -1,8 +1,8 @@
 # NanoPi-R2S-OpenWrt
  使用 Github Actions 在线编译 NanoPi-R2S 固件
 
- [![lean's openwrt from dyc](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/lean's%20openwrt%20from%20dyc/badge.svg)](https://github.com/msylgj/NanoPi-R2S-OpenWrt/actions?query=workflow%3A%22lean%27s+openwrt+from+dyc%22)
- [![lean's openwrt from chuck](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/lean's%20openwrt%20from%20chuck/badge.svg)](https://github.com/msylgj/NanoPi-R2S-OpenWrt/actions?query=workflow%3A%22lean%27s+openwrt+from+chuck%22)
+ [![Lean's Openwrt From Chuck](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/Lean's%20Openwrt%20From%20Chuck/badge.svg)](https://github.com/msylgj/NanoPi-R2S-OpenWrt/actions?query=workflow%3A%22Lean%27s+Openwrt+From+Chuck%22)
+ [![Openwrt From QiuSimons](https://github.com/msylgj/NanoPi-R2S-OpenWrt/workflows/Openwrt%20From%20QiuSimons/badge.svg)](https://github.com/msylgj/NanoPi-R2S-OpenWrt/actions?query=workflow%3A%22Openwrt+From+QiuSimons%22)
 
 ## 发布地址
 [点我下载](https://github.com/msylgj/NanoPi-R2S-OpenWrt/releases)
@@ -12,8 +12,9 @@
 
 ## 说明
 * 双版本,Fork自以下两位大神,个人根据**完全私人**口味进行了一定修改
-    - [klever1988/nanopi-openwrt](https://github.com/klever1988/nanopi-openwrt)
+    - [QiuSimons/R2S_OP_SSRP](https://github.com/QiuSimons/R2S_OP_SSRP)
     - [fanck0605/nanopi-r2s](https://github.com/fanck0605/nanopi-r2s)
+    - QiuSimons版本完全基于官方OpenWrt,Chuck(fanck0605)版本基于Lean版OpenWrt
 * ipv4: 192.168.2.1
 * username: root
 * password: password
@@ -24,16 +25,15 @@
     ```bash
     0 1 * * * /usr/bin/autoupdate_tracker.sh 1>/dev/null 2>&1 &
     ```
-* wan口和lan口互换(*chuck*)
-* chuck版确认使用5.4.36内核,目前测试已基本稳定,有问题可以反馈
-* 建议刷机完成之后先手动重启一次
+* chuck版目前测试已基本稳定,有问题可以反馈
+* 强烈建议刷机完成之后先手动重启一次
 
 ## 已知问题
-### chuck版
+### Chuck版
 1. 历史问题已修复,暂无
 
-### dyc版
-1. 暂无
+### QiuSimons版
+1. 测试中
 
 ## 插件清单
 - aria2
@@ -44,18 +44,6 @@
 - frps(注意是服务端)
 - kms
 - **r-Plus
-- 默认移除: netdata uhttpd vftpd frpc
-
-## 版本区别
-* DYC(klever1988)版本
-    - 保留了对usb-wifi的支持
-    - 未互换wan lan
-* Chuck(fanck0605)版本
-    - 未同步添加usb-wifi支持
-    - 开启wan lan互换
-    - 较为精简
-* 以上区别都增加到了yml中注释掉了,有需要可以在yml中删除注释后自行编译
-* 其它未感受到明显差异, 两位大佬的版本都十分优秀, 请不要做任何比较, 选择合适的就好
 
 ## 升级方法
 * ssh登录到路由器,直接执行./au.sh
@@ -71,6 +59,7 @@ wget https://github.com/msylgj/NanoPi-R2S-OpenWrt/raw/master/scripts/autoupdate.
 (脚本原版由gary lau提供，非常感谢！)
 
 ## 特别感谢（排名不分先后）
+* [QiuSimons/R2S_OP_SSRP](https://github.com/QiuSimons/R2S_OP_SSRP)
 * [fanck0605/nanopi-r2s](https://github.com/fanck0605/nanopi-r2s)
 * [klever1988/nanopi-openwrt](https://github.com/klever1988/nanopi-openwrt)
 * [lsl330/R2S-SCRIPTS](https://github.com/lsl330/R2S-SCRIPTS)

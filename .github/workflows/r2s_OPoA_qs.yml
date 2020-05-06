@@ -1,0 +1,163 @@
+name: Openwrt From QiuSimons
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'actionStart_QiuSimons'
+  schedule:
+    - cron: '00 04 * * 5'
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.repository == 'msylgj/NanoPi-R2S-OpenWrt'
+
+    steps:
+
+      - name: Clone Repository
+        uses: actions/checkout@v1
+      - name: Init build dependencies
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          docker rmi $(docker images -q)
+          sudo -E apt-get remove -y --purge azure-cli ghc zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+          sudo -E apt-get update -y
+          sudo -E apt-get install -y build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libreadline-dev libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint ccache curl wget vim nano python python3 python-pip python3-pip python-ply python3-ply haveged lrzsz device-tree-compiler scons
+          wget -O - https://raw.githubusercontent.com/friendlyarm/build-env-on-ubuntu-bionic/master/install.sh | bash
+          sudo -E apt-get autoremove -y --purge
+          sudo -E apt-get clean -y
+          sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php
+          git clone https://github.com/friendlyarm/repo
+          sudo cp repo/repo /usr/bin/
+
+      - name: Prepare Mixedwrt
+        run: |
+          sudo chown -R runner:runner /home/runner/work/NanoPi-R2S-OpenWrt
+          /bin/bash ./scripts/01_prepare_mixedwrt.sh
+
+      - name: Prepare Package
+        run: |
+          cd friendlywrt-rk3328/friendlywrt
+          /bin/bash 02_prepare_package.sh
+
+      - name: Convert Translation
+        run: |
+          cd friendlywrt-rk3328/friendlywrt
+          /bin/bash 03_convert_translation.sh
+
+      - name: Remove Upx
+        run: |
+          cd friendlywrt-rk3328/friendlywrt
+          /bin/bash 04_remove_upx.sh
+
+      - name: Patch Kernel
+        run: |
+          cd friendlywrt-rk3328
+          /bin/bash 05_patch_kernel.sh
+
+      - name: Make Config
+        run: |
+          cd friendlywrt-rk3328
+          cat configs/config_rk3328 | grep "TARGET" >> ../config/base_rk3328_qs.seed
+          cat ../config/package_qs.seed >> ../config/base_rk3328_qs.seed
+          cat ../config/base_rk3328_qs.seed > configs/config_rk3328
+          cat ../config/base_rk3328_qs.seed > friendlywrt/.config
+
+      - name: Customize Configuration
+        run: |
+          cd friendlywrt-rk3328/friendlywrt
+          sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
+          echo "DISTRIB_DESCRIPTION='Built by OPoA($(date +%Y.%m.%d)) @ OpenWrt'" >> package/base-files/files/etc/openwrt_release
+          sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner
+          sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+          sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
+          mv ../../scripts/checkwan.sh package/base-files/files/usr/bin && sed -i '/exit/i\/bin/sh /usr/bin/checkwan.sh 1>/dev/null 2>&1 &' package/base-files/files/etc/rc.local
+          mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
+          mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
+
+      # - name: Swap wan and lan
+      #   run: |
+      #     cd friendlywrt-rk3328/friendlywrt
+      #     git apply ../../patches/002-openwrt-swap-wan-and-lan.patch
+
+      - name: Add OPKG Feeds
+        run: |
+          cd friendlywrt-rk3328
+          git clone -b src --depth 1 https://github.com/songchenwen/nanopi-r2s-opkg-feeds.git
+          mkdir -p friendlywrt/package/base-files/files/etc/opkg/keys/
+          cp nanopi-r2s-opkg-feeds/keys/* friendlywrt/package/base-files/files/etc/opkg/keys/
+          rm -rf nanopi-r2s-opkg-feeds
+          sed -i '$a src/gz r2s_targets_scw https://songchenwen.com/nanopi-r2s-opkg-feeds/packages' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
+
+      - name: Build Mixedwrt
+        run: |
+          cd friendlywrt-rk3328/friendlywrt
+          make defconfig
+          cd /home/runner/work/NanoPi-R2S-OpenWrt/NanoPi-R2S-OpenWrt/friendlywrt-rk3328
+          ./scripts/build.sh nanopi_r2s.mk
+
+      - name: Fix FriendlyWrt rootfs owner and group
+        run: |
+          sudo df -lh
+          lodev=$(sudo losetup -f)
+          echo "found unused loop dev $lodev"
+          sudo losetup -P ${lodev} friendlywrt-rk3328/out/*.img
+          sudo rm -rf /mnt/friendlywrt-tmp
+          sudo mkdir -p /mnt/friendlywrt-tmp
+          sudo mount ${lodev}p1 /mnt/friendlywrt-tmp
+          sudo chown -R root:root /mnt/friendlywrt-tmp
+          sudo umount /mnt/friendlywrt-tmp
+          sudo losetup -d ${lodev}
+
+      - name: Cleaning
+        run: |
+          cd friendlywrt-rk3328/scripts/sd-fuse/out
+          rm -rf `ls | grep -v ".img"`
+          rm -f .gitignore
+
+      - name: Assemble Artifact
+        id: assemble_artifact
+        run: |
+          rm -rf ./artifact/
+          mkdir -p ./artifact/
+          mv /home/runner/work/NanoPi-R2S-OpenWrt/NanoPi-R2S-OpenWrt/friendlywrt-rk3328/scripts/sd-fuse/out/*img* ./artifact/
+          mv /home/runner/work/NanoPi-R2S-OpenWrt/NanoPi-R2S-OpenWrt/friendlywrt-rk3328/friendlywrt/.config ./artifact/
+          zip -r artifact.zip ./artifact/
+          release_tag="R2S-OPoA-QiuSimons-$(date +%Y-%m-%d)"
+          echo "##[set-output name=release_tag;]$release_tag"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ steps.assemble_artifact.outputs.release_tag }}-ROM
+          path: ./artifact.zip
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.workflow_token }}
+        with:
+          tag_name: ${{ steps.assemble_artifact.outputs.release_tag }}
+          release_name: 测试发布 ${{ steps.assemble_artifact.outputs.release_tag }}
+          draft: false
+          prerelease: true
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.workflow_token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./artifact.zip
+          asset_name: ${{ steps.assemble_artifact.outputs.release_tag }}-ROM.zip
+          asset_content_type: application/zip
