@@ -12,7 +12,7 @@ cd ..
 #调整friendlywrt的更新源，取消不安全的防火墙设定
 latest_feed="$(curl -s https://github.com/openwrt/openwrt/releases |grep -Eo "v[0-9\.]+.tar.gz" |sed -n 1p |sed 's/v//g' |sed 's/.tar.gz//g')"
 sed -i 's,19.07.1,'"${latest_feed}"',g' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
-sed -i 's/downloads.openwrt.org/mirrors.cloud.tencent.com/g' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
+sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/openwrt#g' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
 sed -i 's,ACCEPT,REJECT,g' device/friendlyelec/rk3328/default-settings/install.sh
 #去除不必要的操作
 sed -i 's,./scripts,#./scripts,g' scripts/mk-friendlywrt.sh
@@ -57,5 +57,5 @@ rm -rf ./scripts/.git
 cp -f ./scripts/02_prepare_package.sh ./friendlywrt-rk3328/friendlywrt/
 cp -f ./scripts/03_convert_translation.sh ./friendlywrt-rk3328/friendlywrt/
 cp -f ./scripts/04_remove_upx.sh ./friendlywrt-rk3328/friendlywrt/
-cp -f ./scripts/05_patch_kernel.sh ./friendlywrt-rk3328/05_patch_kernel.sh
+cp -f ./scripts/05_patch_kernel.sh ./friendlywrt-rk3328/
 exit 0
