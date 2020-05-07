@@ -27,13 +27,13 @@ else
 		backup=0
 	fi
 	echo -e '\e[92m请选择版本分支\e[0m'
-	echo -e '\e[92m  1.QiuSimons版(默认)\e[0m'
-	echo -e '\e[92m  2.Chuck版\e[0m'
+	echo -e '\e[92m  1.Chuck版(默认)\e[0m'
+	echo -e '\e[92m  2.QiuSimons版\e[0m'
 	read -p '请选择(1/2):' rom
 	if [ "$rom" -eq 2 ]; then
-		romtype='Chuck'
-	else
 		romtype='QiuSimons'
+	else
+		romtype='Chuck'
 	fi
 	# 切换下载站点
 	read -p '是否从镜像站点下载?(解决无科学上网情况下下载慢的问题, y or n):' mirror
