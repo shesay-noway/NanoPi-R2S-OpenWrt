@@ -32,6 +32,7 @@ git rebase --skip
 git rebase --skip
 git rebase --skip
 #删除不必要的文件
+rm -f ./target/linux/rockchip-rk3328/patches-4.14/0001-net-thunderx-workaround-BGX-TX-Underflow-issue.patch
 rm -f ./include/version.mk
 rm -f ./package/base-files/image-config.in
 rm -f ./feeds.conf.default
