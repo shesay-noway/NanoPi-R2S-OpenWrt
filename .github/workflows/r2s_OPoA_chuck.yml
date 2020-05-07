@@ -115,10 +115,10 @@ jobs:
           mv ../../scripts/autoupdate_tracker.sh package/base-files/files/usr/bin && chmod +x package/base-files/files/usr/bin/autoupdate_tracker.sh
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
 
-      # - name: Swap wan and lan
-      #   run: |
-      #     cd rk3328/friendlywrt
-      #     git apply ../../patches/002-openwrt-swap-wan-and-lan.patch
+      - name: Swap wan and lan
+        run: |
+          cd rk3328/friendlywrt
+          git apply ../../patches/002-openwrt-swap-wan-and-lan.patch
 
       - name: Add OPKG Feeds
         run: |
