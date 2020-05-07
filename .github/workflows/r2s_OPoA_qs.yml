@@ -46,27 +46,27 @@ jobs:
       - name: Prepare Mixedwrt
         run: |
           sudo chown -R runner:runner /home/runner/work/NanoPi-R2S-OpenWrt
-          ./scripts/01_prepare_mixedwrt.sh
+          /bin/bash ./scripts/01_prepare_mixedwrt.sh
 
       - name: Prepare Package
         run: |
           cd friendlywrt-rk3328/friendlywrt
-          ./02_prepare_package.sh
+          /bin/bash 02_prepare_package.sh
 
       - name: Convert Translation
         run: |
           cd friendlywrt-rk3328/friendlywrt
-          ./03_convert_translation.sh
+          /bin/bash 03_convert_translation.sh
 
       - name: Remove Upx
         run: |
           cd friendlywrt-rk3328/friendlywrt
-          ./04_remove_upx.sh
+          /bin/bash 04_remove_upx.sh
 
       - name: Patch Kernel
         run: |
           cd friendlywrt-rk3328
-          ./05_patch_kernel.sh
+          /bin/bash 05_patch_kernel.sh
 
       - name: Make Config
         run: |
