@@ -37,7 +37,7 @@
 
 ## 插件清单
 - aria2
-- ddns with aliyun&dnspod
+- ddns with aliyun
 - 解锁网易云灰色歌曲
 - wol网络唤醒
 - samba
