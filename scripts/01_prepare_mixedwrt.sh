@@ -54,8 +54,8 @@ cp -f ./opofficial/package/base-files/files/bin/config_generate ./friendlywrt/pa
 cd ..
 #为下一步做准备
 rm -rf ./scripts/.git
-cp -f ./scripts/02_prepare_package.sh ./friendlywrt-rk3328/friendlywrt/
-cp -f ./scripts/03_convert_translation.sh ./friendlywrt-rk3328/friendlywrt/
-cp -f ./scripts/04_remove_upx.sh ./friendlywrt-rk3328/friendlywrt/
-cp -f ./scripts/05_patch_kernel.sh ./friendlywrt-rk3328/
+cp -f ./scripts/02_prepare_package.sh ./friendlywrt-rk3328/friendlywrt/02_prepare_package.sh
+cp -f ./scripts/03_convert_translation.sh ./friendlywrt-rk3328/friendlywrt/03_convert_translation.sh
+cp -f ./scripts/04_remove_upx.sh ./friendlywrt-rk3328/friendlywrt/04_remove_upx.sh
+cp -f ./scripts/05_patch_kernel.sh ./friendlywrt-rk3328/05_patch_kernel.sh
 exit 0

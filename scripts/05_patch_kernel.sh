@@ -32,7 +32,7 @@ cd ../
 #替换fanck0605优化后的内核配置
 cd kernel/
 rm -f ./arch/arm64/configs/nanopi-r2_linux_defconfig
-cat ../../config/nanopi-r2_linux_defconfig > ./arch/arm64/configs/nanopi-r2_linux_defconfig
+cp -f ../../config/nanopi-r2_linux_defconfig ./arch/arm64/configs/nanopi-r2_linux_defconfig
 #启用fullcone内核模块
 wget -O net/netfilter/xt_FULLCONENAT.c https://raw.githubusercontent.com/Chion82/netfilter-full-cone-nat/master/xt_FULLCONENAT.c
 git apply ../../patches/001-kernel-add-full_cone_nat.patch
