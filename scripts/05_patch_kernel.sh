@@ -4,6 +4,16 @@ cd kernel
 git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
 git remote add upstream https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git && git fetch upstream
 git rebase upstream/linux-5.4.y
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
 cd ../
 #解锁1.5G
 cd kernel

@@ -76,7 +76,7 @@ jobs:
           cd friendlywrt-rk3328/friendlywrt
           sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
           echo "DISTRIB_DESCRIPTION='Built by OPoA($(date +%Y.%m.%d)) @ OpenWrt'" >> package/base-files/files/etc/openwrt_release
-          sed -i "/FriendlyWRT/a\ OPoA Build" package/base-files/files/etc/banner
+          sed -i "$ a\ OPoA Build" package/base-files/files/etc/banner
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
           sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
           mv ../../scripts/checkwan.sh package/base-files/files/usr/bin && sed -i '/exit/i\/bin/sh /usr/bin/checkwan.sh 1>/dev/null 2>&1 &' package/base-files/files/etc/rc.local
@@ -95,7 +95,7 @@ jobs:
           mkdir -p friendlywrt/package/base-files/files/etc/opkg/keys/
           cp nanopi-r2s-opkg-feeds/keys/* friendlywrt/package/base-files/files/etc/opkg/keys/
           rm -rf nanopi-r2s-opkg-feeds
-          sed -i '$a src/gz r2s_targets_scw https://songchenwen.com/nanopi-r2s-opkg-feeds/packages' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
+          sed -i '$ a src/gz r2s_targets_scw https://songchenwen.com/nanopi-r2s-opkg-feeds/packages' device/friendlyelec/rk3328/common-files/etc/opkg/distfeeds.conf
 
       - name: Build Mixedwrt
         run: |

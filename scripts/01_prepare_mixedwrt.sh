@@ -21,6 +21,16 @@ cd friendlywrt
 git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
 git remote add upstream https://github.com/openwrt/openwrt.git && git fetch upstream
 git rebase upstream/openwrt-19.07
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
+git rebase --skip
 #删除不必要的文件
 rm -f ./include/version.mk
 rm -f ./package/base-files/image-config.in

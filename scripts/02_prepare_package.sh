@@ -44,10 +44,19 @@ svn co https://github.com/project-openwrt/openwrt/trunk/package/lean/tcpping pac
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/proxychains-ng package/lean/proxychains-ng
 #清理内存
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-ramfree package/lean/luci-app-ramfree
+#ddns
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/ddns-scripts_aliyun package/lean/ddns-scripts_aliyun
+#frps
+git clone https://github.com/lwz322/luci-app-frps.git package/lean/luci-app-frps
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp package/lean/frp
+#filetransfer
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-filetransfer package/lean/luci-app-filetransfer
+#vlmcsd
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/luci-app-vlmcsd package/lean/luci-app-vlmcsd
 #BBR_Patch
 wget -P target/linux/generic/pending-4.14/ https://raw.githubusercontent.com/QiuSimons/Others/master/607-tcp_bbr-adapt-cwnd-based-on-ack-aggregation-estimation.patch
 #FullCone补丁
-# FullCone 
+# FullCone
 git clone -b master --single-branch https://github.com/QiuSimons/openwrt-fullconenat package/fullconenat
 # FireWall Patch
 mkdir package/network/config/firewall/patches
