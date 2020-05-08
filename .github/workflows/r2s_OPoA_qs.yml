@@ -43,7 +43,6 @@ jobs:
 
       - name: Prepare Mixedwrt
         run: |
-          sudo chown -R runner:runner /home/runner/work/NanoPi-R2S-OpenWrt
           /bin/bash ./scripts/01_prepare_mixedwrt.sh
 
       - name: Prepare Package
